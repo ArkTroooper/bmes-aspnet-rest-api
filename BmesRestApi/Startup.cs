@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using BmesRestApi.Database;
 using BmesRestApi.Repositories;
 using BmesRestApi.Repositories.Implementations;
+using BmesRestApi.Services;
+using BmesRestApi.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +35,11 @@ namespace BmesRestApi
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+
+            services.AddTransient<IBrandService, BrandService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ICatalogueService, CatalogueService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
