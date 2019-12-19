@@ -109,29 +109,33 @@ namespace BmesRestApi.Messages
 
         public ProductDto MapToProductDto(Product product)
         {
-            return new ProductDto
+            var productDto = new ProductDto();
+
+            if(product != null)
             {
-                Id = product.Id,
-                Name = product.Name,
-                Slug = product.Slug,
-                Description = product.Description,
-                MetaDescription = product.MetaDescription,
-                MetaKeywords = product.MetaKeywords,
-                SKU = product.MetaDescription,
-                Model = product.MetaKeywords,
-                Price = product.Price,
-                SalePrice = product.SalePrice,
-                OldPrice = product.OldPrice,
-                ImageUrl = product.ImageUrl,
-                QuantityInStock = product.QuantityInStock,
-                IsBestseller = product.IsBestseller,
-                CategoryId = product.CategoryId,
-                BrandId = product.BrandId,
-                ProductStatus = (int)product.ProductStatus,
-                CreateDate = product.CreateDate,
-                ModifiedDate = product.ModifiedDate,
-                IsDeleted = product.IsDeleted
+                productDto.Id = product.Id;
+                productDto.Name = product.Name;
+                productDto.Slug = product.Slug;
+                productDto.Description = product.Description;
+                productDto.MetaDescription = product.MetaDescription;
+                productDto.MetaKeywords = product.MetaKeywords;
+                productDto.SKU = product.MetaDescription;
+                productDto.Model = product.MetaKeywords;
+                productDto.Price = product.Price;
+                productDto.SalePrice = product.SalePrice;
+                productDto.OldPrice = product.OldPrice;
+                productDto.ImageUrl = product.ImageUrl;
+                productDto.QuantityInStock = product.QuantityInStock;
+                productDto.IsBestseller = product.IsBestseller;
+                productDto.CategoryId = product.CategoryId;
+                productDto.BrandId = product.BrandId;
+                productDto.ProductStatus = (int) product.ProductStatus;
+                productDto.CreateDate = product.CreateDate;
+                productDto.ModifiedDate = product.ModifiedDate;
+                productDto.IsDeleted = product.IsDeleted;
             };
+
+            return productDto;
         }
 
         public List<BrandDto> MapToBrandDtos(IEnumerable<Brand> brands)

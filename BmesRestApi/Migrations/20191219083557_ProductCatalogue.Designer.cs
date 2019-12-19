@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BmesRestApi.Migrations
 {
     [DbContext(typeof(BmesDbContext))]
-    [Migration("20191214154006_productCatalogue")]
-    partial class productCatalogue
+    [Migration("20191219083557_ProductCatalogue")]
+    partial class ProductCatalogue
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

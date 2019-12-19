@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BmesRestApi.Migrations
 {
-    public partial class productCatalogue : Migration
+    public partial class ProductCatalogue : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
