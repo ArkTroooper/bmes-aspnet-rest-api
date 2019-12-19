@@ -60,12 +60,16 @@ namespace BmesRestApi
             services.AddTransient<IAddressRepository, AddressRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IOrderItemRepository, OrderItemRepository>();
 
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICatalogueService, CatalogueService>();
             services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<ICheckoutService, CheckoutService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 

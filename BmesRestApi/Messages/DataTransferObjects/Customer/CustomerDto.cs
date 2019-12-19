@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BmesRestApi.Messages.DataTransferObjects.Address;
+using BmesRestApi.Messages.DataTransferObjects.Order;
 
 namespace BmesRestApi.Messages.DataTransferObjects.Customer
 {
@@ -19,6 +18,7 @@ namespace BmesRestApi.Messages.DataTransferObjects.Customer
         public DateTimeOffset CreateDate { get; set; }
         public DateTimeOffset ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
+        public IEnumerable<OrderDto> Orders { get; set; }
         public IEnumerable<AddressDto> Addresses { get; set; }
     }
 }
