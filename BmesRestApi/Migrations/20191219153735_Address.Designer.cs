@@ -3,14 +3,16 @@ using System;
 using BmesRestApi.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BmesRestApi.Migrations
 {
     [DbContext(typeof(BmesDbContext))]
-    partial class BmesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191219153735_Address")]
+    partial class Address
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

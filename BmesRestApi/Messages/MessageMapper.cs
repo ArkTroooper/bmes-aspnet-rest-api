@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using BmesRestApi.Messages.DataTransferObjects.Address;
 using BmesRestApi.Messages.DataTransferObjects.Cart;
 using BmesRestApi.Messages.DataTransferObjects.Product;
+using BmesRestApi.Models.Address;
 using BmesRestApi.Models.Cart;
 using BmesRestApi.Models.Product;
 
@@ -202,6 +204,49 @@ namespace BmesRestApi.Messages
             };
         }
 
+        public AddressDto MapToAddressDto(Address address)
+        {
+            var addressDto = new AddressDto();
+
+            if(address != null)
+            {
+                addressDto.Id = address.Id;
+                addressDto.Name = address.Name;
+                addressDto.AddressLine1 = address.AddressLine1;
+                addressDto.AddressLine2 = address.AddressLine2;
+                addressDto.City = address.City;
+                addressDto.Country = address.Country;
+                addressDto.State = address.State;
+                addressDto.ZipCode = address.ZipCode;
+                addressDto.CreateDate = address.CreateDate;
+                addressDto.ModifiedDate = address.ModifiedDate;
+                addressDto.IsDeleted = address.IsDeleted;
+
+            };
+
+            return addressDto;
+        }
+
+        public Address MapToAddress(AddressDto addressDto)
+        {
+            var address = new Address();
+            if(addressDto != null)
+            {
+                address.Id = addressDto.Id;
+                address.Name = addressDto.Name;
+                address.AddressLine1 = addressDto.AddressLine1;
+                address.AddressLine2 = addressDto.AddressLine2;
+                address.City = addressDto.City;
+                address.Country = addressDto.Country;
+                address.State = addressDto.State;
+                address.ZipCode = addressDto.ZipCode;
+                address.CreateDate = addressDto.CreateDate;
+                address.ModifiedDate = addressDto.ModifiedDate;
+                address.IsDeleted = addressDto.IsDeleted;
+            };
+            return address;
+        }
+
         public List<BrandDto> MapToBrandDtos(IEnumerable<Brand> brands)
         {
             var brandDtos = new List<BrandDto>();
@@ -244,6 +289,16 @@ namespace BmesRestApi.Messages
                 cartItemDtos.Add(cartItemDto);
             }
             return cartItemDtos;
+        }
+        public List<AddressDto> MapToAddressDtos(IEnumerable<Address> addresses)
+        {
+            var addressDtos = new List<AddressDto>();
+            foreach (var address in addresses)
+            {
+                var addressDto = MapToAddressDto(address);
+                addressDtos.Add(addressDto);
+            }
+            return addressDtos;
         }
     }
 }
