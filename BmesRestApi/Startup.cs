@@ -9,6 +9,7 @@ using BmesRestApi.Services;
 using BmesRestApi.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,12 @@ namespace BmesRestApi
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddMemoryCache();
+
+            services.AddSession();
+
+            services.AddDistributedMemoryCache();
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -40,15 +47,22 @@ namespace BmesRestApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Building Materials E-Store", Version = "v1" });
             });
 
+           
+
             services.AddDbContext<BmesDbContext>(options => options.UseSqlite(Configuration["Data:BmesApi:ConnectionString"]));
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
 
+            services.AddTransient<ICartRepository, CartRepository>();
+            services.AddTransient<ICartItemRepository, CartItemRepository>();
+
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICatalogueService, CatalogueService>();
+            services.AddTransient<ICartService, CartService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +72,7 @@ namespace BmesRestApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSession();
 
             app.UseSwagger();
 
