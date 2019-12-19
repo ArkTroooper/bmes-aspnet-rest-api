@@ -58,6 +58,8 @@ namespace BmesRestApi
             services.AddTransient<ICartItemRepository, CartItemRepository>();
 
             services.AddTransient<IAddressRepository, AddressRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IPersonRepository, PersonRepository>();
 
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<ICategoryService, CategoryService>();

@@ -37,6 +37,9 @@ namespace BmesRestApi.Migrations
                     b.Property<DateTimeOffset>("CreateDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<long?>("CustomerId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
 
@@ -53,6 +56,8 @@ namespace BmesRestApi.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Addresses");
                 });
@@ -114,6 +119,31 @@ namespace BmesRestApi.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
+                });
+
+            modelBuilder.Entity("BmesRestApi.Models.Customer.Customer", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("CreateDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("ModifiedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("PersonId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("BmesRestApi.Models.Product.Brand", b =>
@@ -267,6 +297,54 @@ namespace BmesRestApi.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("BmesRestApi.Models.Shared.Person", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("CreateDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DateOfBirth")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("ModifiedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("People");
+                });
+
+            modelBuilder.Entity("BmesRestApi.Models.Address.Address", b =>
+                {
+                    b.HasOne("BmesRestApi.Models.Customer.Customer", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("CustomerId");
+                });
+
             modelBuilder.Entity("BmesRestApi.Models.Cart.CartItem", b =>
                 {
                     b.HasOne("BmesRestApi.Models.Cart.Cart", "Cart")
@@ -278,6 +356,15 @@ namespace BmesRestApi.Migrations
                     b.HasOne("BmesRestApi.Models.Product.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BmesRestApi.Models.Customer.Customer", b =>
+                {
+                    b.HasOne("BmesRestApi.Models.Shared.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

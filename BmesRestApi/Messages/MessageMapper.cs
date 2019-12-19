@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using BmesRestApi.Messages.DataTransferObjects.Address;
 using BmesRestApi.Messages.DataTransferObjects.Cart;
+using BmesRestApi.Messages.DataTransferObjects.Customer;
 using BmesRestApi.Messages.DataTransferObjects.Product;
+using BmesRestApi.Messages.DataTransferObjects.Shared;
 using BmesRestApi.Models.Address;
 using BmesRestApi.Models.Cart;
+using BmesRestApi.Models.Customer;
 using BmesRestApi.Models.Product;
+using BmesRestApi.Models.Shared;
 
 namespace BmesRestApi.Messages
 {
@@ -245,6 +249,87 @@ namespace BmesRestApi.Messages
                 address.IsDeleted = addressDto.IsDeleted;
             };
             return address;
+        }
+
+        public CustomerDto MapToCustomerDto(Customer customer)
+        {
+            var customerDto = new CustomerDto
+            {
+                Id = customer.Id,
+                FirstName = customer.Person.FirstName,
+                MiddleName = customer.Person.MiddleName,
+                LastName = customer.Person.LastName,
+                EmailAddress = customer.Person.EmailAddress,
+                PhoneNumber = customer.Person.PhoneNumber,
+                Gender = (int)customer.Person.Gender,
+                DateOfBirth = customer.Person.DateOfBirth,
+                CreateDate = customer.CreateDate,
+                ModifiedDate = customer.ModifiedDate,
+                IsDeleted = customer.IsDeleted
+            };
+
+            return customerDto;
+        }
+        public Customer MapToCustomer(CustomerDto customerDto)
+        {
+            var person = new Person
+            {
+                Id = customerDto.Id,
+                FirstName = customerDto.FirstName,
+                MiddleName = customerDto.MiddleName,
+                LastName = customerDto.LastName,
+                EmailAddress = customerDto.EmailAddress,
+                PhoneNumber = customerDto.PhoneNumber,
+                Gender = (Gender)customerDto.Gender,
+                DateOfBirth = customerDto.DateOfBirth,
+                CreateDate = customerDto.CreateDate,
+                ModifiedDate = customerDto.ModifiedDate,
+                IsDeleted = customerDto.IsDeleted
+            };
+
+            return new Customer
+            {
+                Id = customerDto.Id,
+                Person = person
+            };
+        }
+
+        public PersonDto MapToPersonDto(Person person)
+        {
+            var personDto = new PersonDto
+            {
+                Id = person.Id,
+                FirstName = person.FirstName,
+                MiddleName = person.MiddleName,
+                LastName = person.LastName,
+                EmailAddress = person.EmailAddress,
+                PhoneNumber = person.PhoneNumber,
+                Gender = (int)person.Gender,
+                DateOfBirth = person.DateOfBirth,
+                CreateDate = person.CreateDate,
+                ModifiedDate = person.ModifiedDate,
+                IsDeleted = person.IsDeleted
+            };
+
+            return personDto;
+        }
+
+        public Person MapToPerson(PersonDto personDto)
+        {
+            return new Person
+            {
+                Id = personDto.Id,
+                FirstName = personDto.FirstName,
+                MiddleName = personDto.MiddleName,
+                LastName = personDto.LastName,
+                EmailAddress = personDto.EmailAddress,
+                PhoneNumber = personDto.PhoneNumber,
+                Gender = (Gender)personDto.Gender,
+                DateOfBirth = personDto.DateOfBirth,
+                CreateDate = personDto.CreateDate,
+                ModifiedDate = personDto.ModifiedDate,
+                IsDeleted = personDto.IsDeleted
+            };
         }
 
         public List<BrandDto> MapToBrandDtos(IEnumerable<Brand> brands)
