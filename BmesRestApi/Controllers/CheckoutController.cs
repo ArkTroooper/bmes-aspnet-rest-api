@@ -1,10 +1,12 @@
 ﻿using BmesRestApi.Messages.Request.Checkout;
 using BmesRestApi.Messages.Response.Checkout;
 using BmesRestApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BmesRestApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CheckoutController : ControllerBase

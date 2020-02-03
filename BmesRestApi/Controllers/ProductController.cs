@@ -1,10 +1,12 @@
 ﻿using BmesRestApi.Messages.Request.Product;
 using BmesRestApi.Messages.Response.Product;
 using BmesRestApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BmesRestApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -15,6 +17,7 @@ namespace BmesRestApi.Controllers
             _productService = productService;
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<GetProductResponse> GetProduct(long id)
         {
@@ -26,6 +29,7 @@ namespace BmesRestApi.Controllers
             return getProductResponse;
         }
 
+        [AllowAnonymous]
         [HttpGet("{categorySlug}/{brandSlug}/{page}/{productsPerPage}")]
         public ActionResult<FetchProductsResponse> GetProducts(string categorySlug, string brandSlug, int page, int productsPerPage)
         {
@@ -40,6 +44,7 @@ namespace BmesRestApi.Controllers
             return fetchProductsResponse;
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult<CreateProductResponse> PostProduct(CreateProductRequest createProductRequest)
         {
@@ -47,6 +52,7 @@ namespace BmesRestApi.Controllers
             return createProductResponse;
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut()]
         public ActionResult<UpdateProductResponse> PutProduct(UpdateProductRequest updateProductRequest)
         {
@@ -56,6 +62,7 @@ namespace BmesRestApi.Controllers
             return updateProductResponse;
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public ActionResult<DeleteProductResponse> DeleteProduct(long id)
         {

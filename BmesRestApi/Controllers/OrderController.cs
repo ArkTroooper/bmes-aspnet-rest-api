@@ -1,10 +1,12 @@
 ﻿using BmesRestApi.Messages.Request.Order;
 using BmesRestApi.Messages.Response.Order;
 using BmesRestApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BmesRestApi.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
