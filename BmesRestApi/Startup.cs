@@ -72,10 +72,10 @@ namespace BmesRestApi
 
            
 
-            services.AddDbContext<BmesDbContext>(options => options.UseSqlite(Configuration["Data:BmesApi:ConnectionString"]));
+            services.AddDbContext<BmesDbContext>(options => options.UseSqlServer(Configuration["Data:BmesApi:ConnectionString"]));
             
             services.AddDbContext<BmesIdentityDbContext>(options =>
-                options.UseSqlite(
+                options.UseSqlServer(
                     Configuration["Data:BmesIdentity:ConnectionString"]));
 
             services.AddIdentity<User, IdentityRole>()
